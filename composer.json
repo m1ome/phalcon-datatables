@@ -1,0 +1,13 @@
+{
+    "name": "m1ome/phalcon-datatables",
+    "description": "DataTables adapter for Phalcon Framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Makarenko",
+            "email": "cryfall@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
