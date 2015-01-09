@@ -2,6 +2,11 @@
     "name": "m1ome/phalcon-datatables",
     "description": "DataTables adapter for Phalcon Framework",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DataTables\\": "src/"
+        }
+    },
     "authors": [
         {
             "name": "Pavel Makarenko",
