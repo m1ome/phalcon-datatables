@@ -13,7 +13,18 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 * ResultSet Adapter
 
 # Installation
-
+### Installation via Composer
+* Install a composer
+* Create `composer.json` file inside your project directory
+* Paste into it
+```json
+{
+    "require": {
+        "m1ome/phalcon-datatables": "dev-master"
+    }
+}
+```
+* Run `composer install`
 
 # Example usage
 It uses Phalcon [QueryBuilder](http://docs.phalconphp.com/en/latest/api/Phalcon_Mvc_Model_Query_Builder.html) for pagination in DataTables.
@@ -32,7 +43,7 @@ class TestController extends \Phalcon\Mvc\Controller {
                 ->columns('id, name, email, balance')
                 ->from('User')
                 ->orderBy('name');
-
+            
             return $builder->getContent();
         }
     }
