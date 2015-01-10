@@ -21,7 +21,7 @@ class QueryBuilder extends Builder implements DataTable {
     $this->di     = DI::getDefault();
   }
 
-  public function getContent() {
+  public function getResponse() {
     $builder = new PQueryBuilder(['builder' => $this, 'page' => 1, 'limit' => 1]);
     $totalItems = $builder->getPaginate()->total_items;
 

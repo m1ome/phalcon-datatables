@@ -44,7 +44,7 @@ class TestController extends \Phalcon\Mvc\Controller {
                 ->from('User')
                 ->orderBy('name');
             
-            return $builder->getContent();
+            return $builder->getResponse();
         }
     }
 }
