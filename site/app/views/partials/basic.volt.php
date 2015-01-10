@@ -16,7 +16,7 @@
 </script>
 
 <h4>Basic usage</h4>
-<p>Usage with sorting and searching</p>
+<p>Usage with sorting and searching (It does a "OR" filtering)</p>
 
 <code>Controller</code>
 <pre>
@@ -45,6 +45,7 @@ $('#example_basic').DataTable({
 });
 </pre>
 <br>
+
 <table id="example_basic" class="table table-striped">
   <thead>
     <tr>

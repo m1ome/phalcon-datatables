@@ -70,7 +70,7 @@ class ParamsParser extends Component{
   }
 
   public function getOrder() {
-    return current($this->order);
+    return $this->order;
   }
 
   public function getSearchValue() {

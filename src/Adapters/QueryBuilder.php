@@ -51,15 +51,20 @@ class QueryBuilder extends Builder implements DataTable {
     // Ordering
     $order = $this->params->getOrder();
 
-    if ($order) {
-      $columnId = $order['column'];
-      $orderDir = $order['dir'];
+    if($order) {
+      $orderArray = [];
 
-      $column = $this->params->getColumnById($columnId);
+      foreach($order as $orderBy) {
+        $columnId = $orderBy['column'];
+        $orderDir = $orderBy['dir'];
 
-      if (!is_null($column) && in_array($column, $availableColumns) ) {
-        $this->orderBy("{$column} {$orderDir}");
+        $column = $this->params->getColumnById($columnId);
+        if (!is_null($column) && in_array($column, $availableColumns)) {
+          $orderArray[] = "{$column} {$orderDir}";
+        }
       }
+
+      $this->orderBy(implode(', ', $orderArray));
     }
 
     $builder = new PQueryBuilder([
@@ -74,6 +79,7 @@ class QueryBuilder extends Builder implements DataTable {
     $response['recordsTotal'] = $totalItems;
     $response['recordsFiltered'] = $filteredBuilder->total_items;
     $response['data'] = $filteredBuilder->items->toArray();
+    $response['query'] = $this->getPhql();
 
     $this->di->get('view')->disable();
 
