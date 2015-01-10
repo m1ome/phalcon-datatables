@@ -6,10 +6,10 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 * Pagination by QueryBuilder
 * Global search (by value)
 * Ordering
-
-### Will be supported
 * Multiple column ordering
 * Column-based search
+
+### Will be supported
 * ResultSet Adapter
 
 # Installation
@@ -30,6 +30,10 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 It uses Phalcon [QueryBuilder](http://docs.phalconphp.com/en/latest/api/Phalcon_Mvc_Model_Query_Builder.html) for pagination in DataTables.
 
 In example we have a stantart MVC application, with database enabled. Don't need to provide a normal bootstrap PHP file, for Phalcon documentation, visit official site.
+
+# More examples
+For more examples please search in `site` directory.
+It contains basic *Phalcon* bootstrap page to show all Phalcon-DataTables functionality.
 
 ### Controller:
 ```php
