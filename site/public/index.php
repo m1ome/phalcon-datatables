@@ -37,9 +37,7 @@ $app->post('/example_basic', function() use($app) {
   $builder = new \DataTables\Adapters\QueryBuilder();
   $builder->columns('id, name, email')
           ->from('Example\Models\User');
-
-
-
+          
   echo $builder->getResponse()->getContent();
 });
 

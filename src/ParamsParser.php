@@ -29,6 +29,12 @@ class ParamsParser extends Component{
     $this->page = ceil($this->start / $this->length) + 1;
   }
 
+  public function getColumnsSearch() {
+    return array_filter(array_map(function($item) {
+      return strlen($item['search']['value']) ? $item : null;
+    }, $this->columns));
+  }
+
   public function getSearchableColumns() {
     return array_filter(array_map(function($item) {
       return ($item['searchable'] === "true") ? $item['data'] : null;

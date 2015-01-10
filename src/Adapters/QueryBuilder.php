@@ -27,12 +27,23 @@ class QueryBuilder extends Builder implements DataTable {
 
     // Search bindings
     $availableColumns = array_map('trim', explode(',', $this->getColumns()));
+    // Global search
     $search = $this->params->getSearchValue();
 
     if (strlen($search)) {
       foreach($this->params->getSearchableColumns() as $column) {
         if (in_array($column, $availableColumns)) {
           $this->orWhere("{$column} LIKE ?0", ["%{$search}%"]);
+        }
+      }
+    }
+
+    // Column-based search
+    $columnSearch = $this->params->getColumnsSearch();
+    if ($columnSearch) {
+      foreach($columnSearch as $key => $column) {
+        if (in_array($column['data'], $availableColumns)) {
+          $this->andWhere("{$column['data']} LIKE :key_{$key}:", ["key_{$key}" => "%{$column['search']['value']}%"]);
         }
       }
     }
