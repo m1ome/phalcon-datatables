@@ -26,6 +26,7 @@ $di->setShared('view', function() {
 });
 
 $app = new \Phalcon\Mvc\Micro($di);
+/** @noinspection PhpUndefinedMethodInspection */
 $app->getRouter()->setUriSource(\Phalcon\Mvc\Router::URI_SOURCE_SERVER_REQUEST_URI);
 
 $app->get('/', function() use($app) {

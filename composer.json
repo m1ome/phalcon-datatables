@@ -14,5 +14,8 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phalcon/incubator": "dev-master"
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Example\Models;
 
-class User extends \Phalcon\Mvc\Model {
+use \Phalcon\Mvc\Model;
+
+class User extends Model {
   
 }

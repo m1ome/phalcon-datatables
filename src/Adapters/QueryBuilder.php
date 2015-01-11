@@ -23,13 +23,14 @@ class QueryBuilder extends Builder implements DataTable {
 
   public function getResponse() {
     $builder = new PQueryBuilder(['builder' => $this, 'page' => 1, 'limit' => 1]);
+    /** @noinspection PhpUndefinedFieldInspection */
     $totalItems = $builder->getPaginate()->total_items;
 
     // Search bindings
     $availableColumns = array_map('trim', explode(',', $this->getColumns()));
+
     // Global search
     $search = $this->params->getSearchValue();
-
     if (strlen($search)) {
       foreach($this->params->getSearchableColumns() as $column) {
         if (in_array($column, $availableColumns)) {
@@ -50,7 +51,6 @@ class QueryBuilder extends Builder implements DataTable {
 
     // Ordering
     $order = $this->params->getOrder();
-
     if($order) {
       $orderArray = [];
 
@@ -77,11 +77,15 @@ class QueryBuilder extends Builder implements DataTable {
     $response = [];
     $response['draw']  = $this->params->getDraw();
     $response['recordsTotal'] = $totalItems;
+    /** @noinspection PhpUndefinedFieldInspection */
     $response['recordsFiltered'] = $filteredBuilder->total_items;
+    /** @noinspection PhpUndefinedFieldInspection */
     $response['data'] = $filteredBuilder->items->toArray();
     $response['query'] = $this->getPhql();
 
-    $this->di->get('view')->disable();
+    if ($this->di->has('view')) {
+      $this->di->get('view')->disable();
+    }
 
     $responseJSON = new Response();
     $responseJSON->setContentType('application/json', 'utf8');

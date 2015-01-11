@@ -26,7 +26,7 @@ class ParamsParser extends Component{
     $this->order   = isset($requestParams['order']) ? $requestParams['order'] : [];
 
     // Columns for pagination
-    $this->page = ceil($this->start / $this->length) + 1;
+    $this->page = floor($this->start / $this->length) + 1;
   }
 
   public function getColumnsSearch() {
