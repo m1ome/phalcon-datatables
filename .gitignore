@@ -2,3 +2,4 @@
 vendor/
 site/vendor
 site/app/views/*.php
+composer.lock
