@@ -80,7 +80,15 @@ class QueryBuilder extends Builder implements DataTable {
     /** @noinspection PhpUndefinedFieldInspection */
     $response['recordsFiltered'] = $filteredBuilder->total_items;
     /** @noinspection PhpUndefinedFieldInspection */
-    $response['data'] = $filteredBuilder->items->toArray();
+    $data = [];
+    foreach($filteredBuilder->items->toArray() as $item) {
+      $keys   = array_map(function($key) {
+        return str_replace('id', 'DT_RowId', $key);
+      }, array_keys($item));
+      $values = array_values($item);
+
+      $data[] = array_combine($keys, $values);
+    }
     $response['query'] = $this->getPhql();
 
     if ($this->di->has('view')) {
