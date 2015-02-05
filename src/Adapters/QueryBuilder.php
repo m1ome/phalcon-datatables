@@ -27,7 +27,11 @@ class QueryBuilder extends Builder implements DataTable {
     $totalItems = $builder->getPaginate()->total_items;
 
     // Search bindings
-    $availableColumns = array_map('trim', explode(',', $this->getColumns()));
+    $columns = $this->getColumns();
+    if (!is_array($columns)){
+      $columns = explode(',', $columns);
+    }
+    $availableColumns = array_map('trim', $columns);
 
     // Global search
     $search = $this->params->getSearchValue();
@@ -89,6 +93,7 @@ class QueryBuilder extends Builder implements DataTable {
 
       $data[] = array_combine($keys, $values);
     }
+    $response['data'] = $data;
     $response['query'] = $this->getPhql();
 
     if ($this->di->has('view')) {
