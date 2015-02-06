@@ -1,104 +1,46 @@
 <?php
 namespace DataTables\Adapters;
 
-use DataTables\DataTable;
-use DataTables\ParamsParser;
-use Phalcon\DI;
-use Phalcon\Http\Response;
 use Phalcon\Paginator\Adapter\QueryBuilder as PQueryBuilder;
-use Phalcon\Mvc\Model\Query\Builder;
 
-class QueryBuilder extends Builder implements DataTable {
-  /** @var \DataTables\ParamsParser */
-  protected $params;
-  /** @var \Phalcon\DiInterface  */
-  protected $di;
+class QueryBuilder extends AdapterInterface{
+  protected $builder;
 
-  public function __construct($params = null) {
-    parent::__construct($params);
-
-    $this->params = new ParamsParser();
-    $this->di     = DI::getDefault();
+  public function setBuilder($builder) {
+    $this->builder = $builder;
   }
 
   public function getResponse() {
-    $builder = new PQueryBuilder(['builder' => $this, 'page' => 1, 'limit' => 1]);
-    /** @noinspection PhpUndefinedFieldInspection */
-    $totalItems = $builder->getPaginate()->total_items;
+    $builder = new PQueryBuilder([
+      'builder' => $this->builder,
+      'limit'   => 1,
+      'page'    => 1,
+    ]);
+    $total = $builder->getPaginate();
 
-    // Search bindings
-    $availableColumns = array_map('trim', explode(',', $this->getColumns()));
+    $this->bind('global_search', function($column, $search) {
+      $this->builder->orWhere("{$column} LIKE ?0", ["%{$search}%"]);
+    });
 
-    // Global search
-    $search = $this->params->getSearchValue();
-    if (strlen($search)) {
-      foreach($this->params->getSearchableColumns() as $column) {
-        if (in_array($column, $availableColumns)) {
-          $this->orWhere("{$column} LIKE ?0", ["%{$search}%"]);
-        }
-      }
-    }
+    $this->bind('column_search', function($column, $search) {
+      $this->builder->andWhere("{$column} LIKE :key_{$column}:", ["key_{$column}" => "%{$search}%"]);
+    });
 
-    // Column-based search
-    $columnSearch = $this->params->getColumnsSearch();
-    if ($columnSearch) {
-      foreach($columnSearch as $key => $column) {
-        if (in_array($column['data'], $availableColumns)) {
-          $this->andWhere("{$column['data']} LIKE :key_{$key}:", ["key_{$key}" => "%{$column['search']['value']}%"]);
-        }
-      }
-    }
-
-    // Ordering
-    $order = $this->params->getOrder();
-    if($order) {
-      $orderArray = [];
-
-      foreach($order as $orderBy) {
-        $columnId = $orderBy['column'];
-        $orderDir = $orderBy['dir'];
-
-        $column = $this->params->getColumnById($columnId);
-        if (!is_null($column) && in_array($column, $availableColumns)) {
-          $orderArray[] = "{$column} {$orderDir}";
-        }
-      }
-
-      $this->orderBy(implode(', ', $orderArray));
-    }
+    $this->bind('order', function($order) {
+      $this->builder->orderBy(implode(', ', $order));
+    });
 
     $builder = new PQueryBuilder([
-      'builder' => $this,
-      'page' => $this->params->getPage(),
-      'limit' => $this->params->getLimit()
+      'builder' => $this->builder,
+      'limit'   => $this->parser->getLimit(),
+      'page'    => $this->parser->getPage(),
     ]);
-    $filteredBuilder = $builder->getPaginate();
+    $filtered = $builder->getPaginate();
 
-    $response = [];
-    $response['draw']  = $this->params->getDraw();
-    $response['recordsTotal'] = $totalItems;
-    /** @noinspection PhpUndefinedFieldInspection */
-    $response['recordsFiltered'] = $filteredBuilder->total_items;
-    /** @noinspection PhpUndefinedFieldInspection */
-    $data = [];
-    foreach($filteredBuilder->items->toArray() as $item) {
-      $keys   = array_map(function($key) {
-        return str_replace('id', 'DT_RowId', $key);
-      }, array_keys($item));
-      $values = array_values($item);
-
-      $data[] = array_combine($keys, $values);
-    }
-    $response['query'] = $this->getPhql();
-
-    if ($this->di->has('view')) {
-      $this->di->get('view')->disable();
-    }
-
-    $responseJSON = new Response();
-    $responseJSON->setContentType('application/json', 'utf8');
-    $responseJSON->setJsonContent($response);
-
-    return $responseJSON;
+    return $this->formResponse([
+      'total'     => $total->total_items,
+      'filtered'  => $filtered->total_items,
+      'data'      => $filtered->items->toArray(),
+    ]);
   }
 }

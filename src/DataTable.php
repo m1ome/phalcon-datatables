@@ -1,7 +1,62 @@
 <?php
 namespace DataTables;
 
-interface DataTable {
-  public function __construct();
-  public function getResponse();
+use DataTables\Adapters\QueryBuilder;
+use Phalcon\Http\Response;
+
+class DataTable extends \Phalcon\Mvc\User\Plugin {
+
+  protected $options;
+  protected $params;
+  protected $response;
+  public    $parser;
+
+  public function __construct($options = []) {
+    $default = [
+      'limit'   => 20,
+      'length'  => 50,
+    ];
+
+    $this->options = $options + $default;
+    $this->parser = new ParamsParser($this->options['limit']);
+  }
+
+  public function getParams() {
+    return $this->parser->getParams();
+  }
+
+  public function getResponse() {
+    return !empty($this->response) ? $this->response : [];
+  }
+
+  public function sendResponse() {
+    if ($this->di->has('view')) {
+      $this->di->get('view')->disable();
+    }
+
+    $response = new Response();
+    $response->setContentType('application/json', 'utf8');
+    $response->setJsonContent($this->getResponse());
+    $response->send();
+  }
+
+  public function fromBuilder($builder, $columns = []) {
+    if (empty($columns)) {
+      $columns = $builder->getColumns();
+      $columns = (is_array($columns)) ? $columns : array_map('trim', explode(',', $columns));
+    }
+
+    $adapter = new QueryBuilder($this->options);
+    $adapter->setBuilder($builder);
+    $adapter->setParser($this->parser);
+    $adapter->setColumns($columns);
+    $this->response = $adapter->getResponse();
+
+    return $this;
+  }
+
+  public function fromResultSet() {
+
+  }
+
 }
