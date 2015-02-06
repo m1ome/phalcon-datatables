@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 5.5
+  - 5.4
+  - 5.6
+
+matrix:
+  fast_finish: true
+
+before_script:
+  - git clone -q https://github.com/phalcon/cphalcon.git
+  - (cd cphalcon/build; sudo ./install && phpenv config-add ../../tests/phalcon.ini)
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install
+  - composer self-update && composer update
+
+script: vendor/bin/kahlan
