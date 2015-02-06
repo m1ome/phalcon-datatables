@@ -7,13 +7,16 @@ $db = new \Phalcon\Db\Adapter\Pdo\Sqlite([
 
 // Generating 1000 record in user table
 $db->query("DELETE FROM user;");
+$balances = [100, 200, 500];
 for($i=0; $i<1000; $i++) {
   $faker = Faker\Factory::create();
 
   $name = $faker->userName;
   $email = $faker->email;
 
-  $db->query("INSERT INTO user VALUES({$i}, '{$name}', '{$email}')");
+  $balance = $balances[array_rand($balances)];
+
+  $db->query("INSERT INTO user VALUES({$i}, '{$name}', '{$email}', '{$balance}')");
   echo 'Insert record [' . $i . '/1000]' . PHP_EOL;
 }
 
