@@ -1,6 +1,7 @@
 {
     "name": "m1ome/phalcon-datatables",
     "description": "DataTables adapter for Phalcon Framework",
+    "keywords": ["Phalcon", "DataTables", "Plugin"],
     "license": "MIT",
     "autoload": {
       "psr-4": {
