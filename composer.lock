@@ -1,0 +1,378 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "846cced2387f7f3eedeb3b1a5d3cf1d7",
+    "packages": [],
+    "packages-dev": [
+        {
+            "name": "crysalead/box",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/box.git",
+                "reference": "d88c57da9091909c0109a679916cb9294f5e5eaa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/box/zipball/d88c57da9091909c0109a679916cb9294f5e5eaa",
+                "reference": "d88c57da9091909c0109a679916cb9294f5e5eaa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "box\\": "src/",
+                    "box\\spec\\": "spec/"
+                },
+                "files": [
+                    "src/init.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Minimalist Dependency Injection Container.",
+            "keywords": [
+                "dependency injection",
+                "dependency injection container",
+                "inversion of control",
+                "ioc"
+            ],
+            "time": "2014-12-07 00:39:07"
+        },
+        {
+            "name": "crysalead/dir",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/dir.git",
+                "reference": "167ab6d2c367703212c16941ab13987cf30788fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/dir/zipball/167ab6d2c367703212c16941ab13987cf30788fb",
+                "reference": "167ab6d2c367703212c16941ab13987cf30788fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "dir\\": "src/",
+                    "dir\\spec\\": "spec/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Recursive directory scanner to locate directories and/or files in a file system",
+            "keywords": [
+                "Directory Scanner",
+                "directory",
+                "file",
+                "file system"
+            ],
+            "time": "2014-12-13 22:46:24"
+        },
+        {
+            "name": "crysalead/filter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/filter.git",
+                "reference": "f965a8664f2341537a86a1c2ca043dcc711c6b54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/filter/zipball/f965a8664f2341537a86a1c2ca043dcc711c6b54",
+                "reference": "f965a8664f2341537a86a1c2ca043dcc711c6b54",
+                "shasum": ""
+            },
+            "require": {
+                "crysalead/jit": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "filter\\": "src/",
+                    "filter\\spec\\": "spec/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CrysaLEAD"
+                }
+            ],
+            "description": "Method filtering system",
+            "keywords": [
+                "aop",
+                "aspect",
+                "aspect programming",
+                "method filtering"
+            ],
+            "time": "2015-01-24 13:30:08"
+        },
+        {
+            "name": "crysalead/jit",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/jit.git",
+                "reference": "057270dd31cb3c33728395df224d96ac0553797d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/jit/zipball/057270dd31cb3c33728395df224d96ac0553797d",
+                "reference": "057270dd31cb3c33728395df224d96ac0553797d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jit\\": "src/",
+                    "jit\\spec\\": "spec/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Just In Time Code Patcher.",
+            "keywords": [
+                "Code Patcher",
+                "jit"
+            ],
+            "time": "2015-01-30 02:25:22"
+        },
+        {
+            "name": "crysalead/kahlan",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/kahlan.git",
+                "reference": "702899d74b43e003fe1fb790245ea1e4696d66d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/kahlan/zipball/702899d74b43e003fe1fb790245ea1e4696d66d3",
+                "reference": "702899d74b43e003fe1fb790245ea1e4696d66d3",
+                "shasum": ""
+            },
+            "require": {
+                "crysalead/box": "dev-master",
+                "crysalead/dir": "dev-master",
+                "crysalead/filter": "dev-master",
+                "crysalead/jit": "dev-master",
+                "crysalead/set": "dev-master",
+                "crysalead/string": "dev-master",
+                "php": ">=5.4"
+            },
+            "bin": [
+                "bin/kahlan"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kahlan\\": "src/",
+                    "kahlan\\spec\\": "spec/"
+                },
+                "files": [
+                    "src/init.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CrysaLEAD"
+                }
+            ],
+            "description": "Behavior-Driven Development (BDD) library.",
+            "keywords": [
+                "BDD",
+                "Behavior-Driven Development",
+                "Monkey Patching",
+                "TDD",
+                "mock",
+                "stub",
+                "testing",
+                "unit test"
+            ],
+            "time": "2015-02-04 17:10:36"
+        },
+        {
+            "name": "crysalead/set",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/set.git",
+                "reference": "fca78453076aca6080f46f6f7b416604526e5c3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/set/zipball/fca78453076aca6080f46f6f7b416604526e5c3b",
+                "reference": "fca78453076aca6080f46f6f7b416604526e5c3b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "set\\": "src/",
+                    "set\\spec\\": "spec/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Array manipulation library",
+            "keywords": [
+                "Array manipulation"
+            ],
+            "time": "2015-01-24 12:06:19"
+        },
+        {
+            "name": "crysalead/string",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/string.git",
+                "reference": "aeb00e4213aa35fd26bf9698dd22f5e60135d2d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/string/zipball/aeb00e4213aa35fd26bf9698dd22f5e60135d2d2",
+                "reference": "aeb00e4213aa35fd26bf9698dd22f5e60135d2d2",
+                "shasum": ""
+            },
+            "require": {
+                "crysalead/set": "dev-master",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "crysalead/kahlan": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "string\\": "src/",
+                    "string\\spec\\": "spec/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "String manipulation library",
+            "keywords": [
+                "string manipulation"
+            ],
+            "time": "2015-01-24 13:51:39"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "81e4eccea302300ac0c69c7ed04c94e29f580633"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/81e4eccea302300ac0c69c7ed04c94e29f580633",
+                "reference": "81e4eccea302300ac0c69c7ed04c94e29f580633",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "suggest": {
+                "ext-intl": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2015-01-27 08:16:46"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "crysalead/kahlan": 20,
+        "fzaninotto/faker": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

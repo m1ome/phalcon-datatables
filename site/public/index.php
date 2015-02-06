@@ -34,12 +34,27 @@ $app->get('/', function() use($app) {
   ]);
 });
 
-$app->post('/example_basic', function() use($app) {
-  $builder = new \DataTables\Adapters\QueryBuilder();
-  $builder->columns('id, name, email')
-          ->from('Example\Models\User');
-          
-  echo $builder->getResponse()->getContent();
+$app->post('/example_querybuilder', function() use($app) {
+
+  $builder = $app->getService('modelsManager')
+                 ->createBuilder()
+                 ->columns('id, name, email, balance')
+                 ->from('Example\Models\User');
+
+  $dataTables = new \DataTables\DataTable();
+  $dataTables->fromBuilder($builder)->sendResponse();
+
+});
+
+$app->get('/example_resultset', function() use($app) {
+
+  $resultset  = $app->getService('modelsManager')
+                    ->createQuery("SELECT * FROM \Example\Models\User")
+                    ->execute();
+
+  $dataTables = new \DataTables\DataTable();
+  $dataTables->fromResultSet($resultset)->sendResponse();
+
 });
 
 $app->handle();

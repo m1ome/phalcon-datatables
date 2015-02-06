@@ -4,76 +4,79 @@ namespace DataTables;
 use Phalcon\Mvc\User\Component;
 
 class ParamsParser extends Component{
-  protected $draw;
-  protected $start;
-  protected $length;
-  protected $columns;
-  protected $search;
-  protected $order;
-  protected $page;
 
-  public function __construct($limit = 20) {
-    $requestParams = $this->request->isPost() ? $this->request->getPost() : $this->request->get();
+  protected $params = [];
+  protected $page   = 1;
 
-    // Parsing starting params
-    $this->draw   = isset($requestParams['draw']) ? $requestParams['draw'] : null;
-    $this->start  = isset($requestParams['start']) ? $requestParams['start'] : 1;
-    $this->length = isset($requestParams['length']) ? $requestParams['length'] : $limit;
+  public function __construct($limit) {
+    $params = [
+      'draw'    => null,
+      'start'   => 1,
+      'length'  => $limit,
+      'columns' => [],
+      'search'  => [],
+      'order'   => []
+    ];
 
-    // Parsing columns and e.t.c
-    $this->columns = isset($requestParams['columns']) ? $requestParams['columns'] : [];
-    $this->search  = isset($requestParams['search']) ? $requestParams['search'] : [];
-    $this->order   = isset($requestParams['order']) ? $requestParams['order'] : [];
-
-    // Columns for pagination
-    $this->page = floor($this->start / $this->length) + 1;
+    $request = $this->di->get('request');
+    $requestParams = $request->isPost() ? $request->getPost() : $request->getQuery();
+    $this->params = (array)$requestParams + $params;
+    $this->setPage();
   }
 
-  public function getColumnsSearch() {
-    return array_filter(array_map(function($item) {
-      return strlen($item['search']['value']) ? $item : null;
-    }, $this->columns));
+  public function getParams() {
+    return $this->params;
   }
 
-  public function getSearchableColumns() {
-    return array_filter(array_map(function($item) {
-      return ($item['searchable'] === "true") ? $item['data'] : null;
-    }, $this->columns));
+  public function setPage() {
+    $this->page = (int)(floor($this->params['start'] / $this->params['length']) + 1);
   }
 
   public function getPage() {
     return $this->page;
   }
 
+  public function getColumnsSearch() {
+    return array_filter(array_map(function($item) {
+      return (isset($item['search']['value']) && strlen($item['search']['value'])) ? $item : null;
+    }, $this->params['columns']));
+  }
+
+  public function getSearchableColumns() {
+    return array_filter(array_map(function($item) {
+      return (isset($item['searchable']) && $item['searchable'] === "true") ? $item['data'] : null;
+    }, $this->params['columns']));
+  }
+
   public function getDraw() {
-    return $this->draw;
+    return $this->params['draw'];
   }
 
   public function getLimit() {
-    return $this->length;
+    return $this->params['length'];
   }
 
   public function getOffset() {
-    return $this->start;
+    return $this->params['start'];
   }
 
   public function getColumns() {
-    return $this->columns;
+    return $this->params['columns'];
   }
 
   public function getColumnById($id) {
-    return isset($this->columns[$id]['data']) ? $this->columns[$id]['data'] : null;
+    return isset($this->params['columns'][$id]['data']) ? $this->params['columns'][$id]['data'] : null;
   }
 
   public function getSearch() {
-    return $this->search;
+    return $this->params['search'];
   }
 
   public function getOrder() {
-    return $this->order;
+    return $this->params['order'];
   }
 
   public function getSearchValue() {
-    return isset($this->search['value']) ? $this->search['value'] : '';
+    return isset($this->params['search']['value']) ? $this->params['search']['value'] : '';
   }
 }

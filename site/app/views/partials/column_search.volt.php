@@ -3,13 +3,14 @@ $(document).ready(function() {
   var table = $('#example_search').DataTable({
     serverSide: true,
     ajax: {
-      url: '/example_basic',
+      url: '/example_querybuilder',
       method: 'POST'
     },
     columns: [
       {data: 'id', searchable: false},
       {data: 'name'},
-      {data: 'email'}
+      {data: 'email'},
+      {data: "balance", searchable: false}
     ]
   });
 
@@ -27,12 +28,15 @@ $(document).ready(function() {
 
 <code>Controller</code>
 <pre>
-$app->post('/example_basic', function() use($app) {
-  $builder = new \DataTables\Adapters\QueryBuilder();
-  $builder->columns('id, name, email')
-          ->from('Example\Models\User');
-          
-  echo $builder->getResponse()->getContent();
+$app->post('/example_querybuilder', function() use($app) {
+
+  $dataTables = new \DataTables\DataTable();
+  $builder = $app->getService('modelsManager')
+                 ->createBuilder()
+                 ->columns('id, name, email, balance')
+                 ->from('Example\Models\User');
+  $dataTables->fromBuilder($builder)->sendResponse();
+
 });
 </pre>
 
@@ -42,13 +46,14 @@ $(document).ready(function() {
   var table = $('#example_search').DataTable({
     serverSide: true,
     ajax: {
-      url: '/example_basic',
+      url: '/example_querybuilder',
       method: 'POST'
     },
     columns: [
       {data: 'id', searchable: false},
       {data: 'name'},
-      {data: 'email'}
+      {data: 'email'},
+      {data: "balance", searchable: false}
     ]
   });
 
@@ -69,6 +74,7 @@ $(document).ready(function() {
       <th>ID</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Balance</th>
     </tr>
   </thead>
   <tbody>
@@ -78,6 +84,7 @@ $(document).ready(function() {
       <th>&nbsp;</th>
       <th><input type="text" placeholder="Search name"></th>
       <th><input type="text" placeholder="Search email"></th>
+      <th>&nbsp;</th>
     </tr>
   </tfoot>
 </table>
