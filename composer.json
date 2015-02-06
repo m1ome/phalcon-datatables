@@ -3,19 +3,22 @@
     "description": "DataTables adapter for Phalcon Framework",
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "DataTables\\": "src/"
-        }
+      "psr-4": {
+        "DataTables\\": "src/"
+      }
     },
     "authors": [
-        {
-            "name": "Pavel Makarenko",
-            "email": "cryfall@gmail.com"
-        }
+      {
+        "name": "Pavel Makarenko",
+        "email": "cryfall@gmail.com"
+      }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+
+    },
     "require-dev": {
-        "phalcon/incubator": "dev-master"
-    }
+      "crysalead/kahlan": "dev-master"
+    },
+    "minimum-stability": "dev"
 }
