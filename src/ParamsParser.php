@@ -18,8 +18,9 @@ class ParamsParser extends Component{
       'order'   => []
     ];
 
-    $requestParams = $this->request->isPost() ? $this->request->getPost() : $this->request->get();
-    $this->params = $requestParams + $params;
+    $request = $this->di->get('request');
+    $requestParams = $request->isPost() ? $request->getPost() : $request->getQuery();
+    $this->params = (array)$requestParams + $params;
     $this->setPage();
   }
 
@@ -28,7 +29,7 @@ class ParamsParser extends Component{
   }
 
   public function setPage() {
-    $this->page = floor($this->params['start'] / $this->params['length']) + 1;
+    $this->page = (int)(floor($this->params['start'] / $this->params['length']) + 1);
   }
 
   public function getPage() {

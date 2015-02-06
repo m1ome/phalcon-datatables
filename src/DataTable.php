@@ -47,7 +47,7 @@ class DataTable extends \Phalcon\Mvc\User\Plugin {
       $columns = (is_array($columns)) ? $columns : array_map('trim', explode(',', $columns));
     }
 
-    $adapter = new QueryBuilder($this->options);
+    $adapter = new QueryBuilder($this->options['length']);
     $adapter->setBuilder($builder);
     $adapter->setParser($this->parser);
     $adapter->setColumns($columns);
@@ -62,7 +62,7 @@ class DataTable extends \Phalcon\Mvc\User\Plugin {
       $resultSet->rewind();
     }
 
-    $adapter = new ResultSet($this->options);
+    $adapter = new ResultSet($this->options['length']);
     $adapter->setResultSet($resultSet);
     $adapter->setParser($this->parser);
     $adapter->setColumns($columns);

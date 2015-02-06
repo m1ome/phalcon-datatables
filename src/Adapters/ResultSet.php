@@ -1,6 +1,8 @@
 <?php
 namespace DataTables\Adapters;
 
+use Phalcon\Mvc\Model\Resultset as PhalconResultSet;
+
 class ResultSet extends AdapterInterface {
 
   protected $resultSet;
@@ -30,8 +32,8 @@ class ResultSet extends AdapterInterface {
 
         foreach($this->filter as $column=>$filters) {
           foreach($filters as $search) {
-            $check = strpos($item->$column, $search) !== false;
-            if (!$check) break;
+            $check = (strpos($item->$column, $search) !== false);
+            if (!$check) break 2;
           }
         }
 
@@ -42,12 +44,8 @@ class ResultSet extends AdapterInterface {
 
       $filtered = count($filter);
 
-      if ($offset > 0) {
-        $filter = array_slice($filter, $offset);
-      }
-
-      if ($limit > 0) {
-        $filter = array_slice($filter, 0, $limit);
+      if ($offset > 1) {
+        $filter = array_slice($filter, ($offset-1));
       }
 
       $items = array_map(function($item) {
@@ -59,16 +57,8 @@ class ResultSet extends AdapterInterface {
         $this->resultSet->seek($offset-1);
       }
 
-      $items = [];
-
-      while($this->resultSet->valid() && count($items) < $limit) {
-        $items[] = $this->resultSet->current();
-        $this->resultSet->next();
-      }
-
-      $items = array_map(function($item) {
-        return $item->toArray();
-      }, $items);
+      $this->resultSet->setHydrateMode(PhalconResultSet::HYDRATE_RECORDS);
+      $items = array_map('array_unique', $this->resultSet->toArray());
     }
 
     if ($this->order) {
@@ -91,9 +81,13 @@ class ResultSet extends AdapterInterface {
       call_user_func_array('array_multisort', $args);
     }
 
+    if ($limit) {
+      $items = array_slice($items, 0, $limit);
+    }
+
     return $this->formResponse([
-      'total'     => $total,
-      'filtered'  => $filtered,
+      'total'     => (int)$total,
+      'filtered'  => (int)$filtered,
       'data'      => $items,
     ]);
   }

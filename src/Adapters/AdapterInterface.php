@@ -4,12 +4,12 @@ namespace DataTables\Adapters;
 
 abstract class AdapterInterface {
 
-  protected $parser = null;
-  protected $columns = null;
-  protected $options = [];
+  protected $parser  = null;
+  protected $columns = [];
+  protected $lentgh  = 30;
 
-  public function __construct($options) {
-    $this->options = $options;
+  public function __construct($length) {
+    $this->length = $length;
   }
 
   abstract public function getResponse();
@@ -26,6 +26,10 @@ abstract class AdapterInterface {
     return in_array($column, $this->columns);
   }
 
+  public function getParser() {
+    return $this->parser;
+  }
+
   public function formResponse($options) {
     $defaults = [
       'total'     => 0,
@@ -38,19 +42,24 @@ abstract class AdapterInterface {
     $response['draw'] = $this->parser->getDraw();
     $response['recordsTotal'] = $options['total'];
     $response['recordsFiltered'] = $options['filtered'];
-    foreach($options['data'] as $item) {
-      if (isset($item['id'])) {
-        $item['DT_RowId'] = $item['id'];
-      }
 
-      $response['data'][] = $item;
+    if (count($options['data'])) {
+      foreach($options['data'] as $item) {
+        if (isset($item['id'])) {
+          $item['DT_RowId'] = $item['id'];
+        }
+
+        $response['data'][] = $item;
+      }
+    } else {
+      $response['data'] = [];
     }
 
     return $response;
   }
 
   public function sanitaze($string) {
-    return mb_substr($string, 0, $this->options['length']);
+    return mb_substr($string, 0, $this->length);
   }
 
   public function bind($case, $closure) {
@@ -80,6 +89,7 @@ abstract class AdapterInterface {
         $orderArray = [];
 
         foreach($order as $columnId=>$orderBy) {
+          if (!isset($orderBy['dir']) || !isset($orderBy['column'])) continue;
           $orderDir = $orderBy['dir'];
 
           $column = $this->parser->getColumnById($columnId);

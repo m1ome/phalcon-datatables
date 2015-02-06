@@ -31,20 +31,38 @@ It uses Phalcon [QueryBuilder](http://docs.phalconphp.com/en/latest/api/Phalcon_
 
 In example we have a stantart MVC application, with database enabled. Don't need to provide a normal bootstrap PHP file, for Phalcon documentation, visit official site.
 
-### Controller:
+### Controller (using QueryBuilder):
 ```php
 <?php
-use \DataTables\Adapters\QueryBuilder;
+use \DataTables\DataTable;
 
 class TestController extends \Phalcon\Mvc\Controller {
     public function indexAction() {
         if ($this->request->isAjax()) {
-            $builder = new QueryBuilder()->
-                ->columns('id, name, email, balance')
-                ->from('User')
-                ->orderBy('name');
-            
-            return $builder->getResponse();
+          $builder = $this->modelsManager->createBuilder()
+                          ->columns('id, name, email, balance')
+                          ->from('Example\Models\User');
+
+          $dataTables = new DataTable();
+          $dataTables->fromBuilder($builder)->sendResponse();
+        }
+    }
+}
+```
+
+### Controller (using ResultSet):
+```php
+<?php
+use \DataTables\DataTable;
+
+class TestController extends \Phalcon\Mvc\Controller {
+    public function indexAction() {
+        if ($this->request->isAjax()) {
+          $resultset  = $this->modelsManager->createQuery("SELECT * FROM \Example\Models\User")
+                             ->execute();
+
+          $dataTables = new DataTable();
+          $dataTables->fromResultSet($resultset)->sendResponse();
         }
     }
 }
