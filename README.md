@@ -1,3 +1,6 @@
+
+![Build Status](https://img.shields.io/badge/branch-master-blue.svg)[![Build Status](https://travis-ci.org/m1ome/phalcon-datatables.svg?branch=master)](https://travis-ci.org/m1ome/phalcon-datatables)
+
 # About
 This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](http://www.datatables.net/).
 # Support
