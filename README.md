@@ -3,14 +3,12 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 # Support
 ### Currently supported
 * QueryBuilder interface
-* Pagination by QueryBuilder
+* ResultSet interface
+* Pagination
 * Global search (by value)
 * Ordering
 * Multiple column ordering
 * Column-based search
-
-### Will be supported
-* ResultSet Adapter
 
 # Installation
 ### Installation via Composer
