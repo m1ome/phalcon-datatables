@@ -2,6 +2,7 @@
 namespace DataTables;
 
 use DataTables\Adapters\QueryBuilder;
+use DataTables\Adapters\ResultSet;
 use Phalcon\Http\Response;
 
 class DataTable extends \Phalcon\Mvc\User\Plugin {
@@ -55,8 +56,19 @@ class DataTable extends \Phalcon\Mvc\User\Plugin {
     return $this;
   }
 
-  public function fromResultSet() {
+  public function fromResultSet($resultSet, $columns = []) {
+    if(empty($columns)) {
+      $columns = array_keys($resultSet->getFirst()->toArray());
+      $resultSet->rewind();
+    }
 
+    $adapter = new ResultSet($this->options);
+    $adapter->setResultSet($resultSet);
+    $adapter->setParser($this->parser);
+    $adapter->setColumns($columns);
+    $this->response = $adapter->getResponse();
+
+    return $this;
   }
 
 }

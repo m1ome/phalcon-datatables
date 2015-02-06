@@ -37,13 +37,13 @@ class ParamsParser extends Component{
 
   public function getColumnsSearch() {
     return array_filter(array_map(function($item) {
-      return strlen($item['search']['value']) ? $item : null;
+      return (isset($item['search']['value']) && strlen($item['search']['value'])) ? $item : null;
     }, $this->params['columns']));
   }
 
   public function getSearchableColumns() {
     return array_filter(array_map(function($item) {
-      return ($item['searchable'] === "true") ? $item['data'] : null;
+      return (isset($item['searchable']) && $item['searchable'] === "true") ? $item['data'] : null;
     }, $this->params['columns']));
   }
 

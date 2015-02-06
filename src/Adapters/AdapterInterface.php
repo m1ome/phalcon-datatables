@@ -39,11 +39,11 @@ abstract class AdapterInterface {
     $response['recordsTotal'] = $options['total'];
     $response['recordsFiltered'] = $options['filtered'];
     foreach($options['data'] as $item) {
-      $keys   = array_map(function($key) {
-        return str_replace('id', 'DT_RowId', $key);
-      }, array_keys($item));
-      $values = array_values($item);
-      $response['data'][] = array_combine($keys, $values);
+      if (isset($item['id'])) {
+        $item['DT_RowId'] = $item['id'];
+      }
+
+      $response['data'][] = $item;
     }
 
     return $response;
@@ -79,8 +79,7 @@ abstract class AdapterInterface {
 
         $orderArray = [];
 
-        foreach($order as $orderBy) {
-          $columnId = $orderBy['column'];
+        foreach($order as $columnId=>$orderBy) {
           $orderDir = $orderBy['dir'];
 
           $column = $this->parser->getColumnById($columnId);
