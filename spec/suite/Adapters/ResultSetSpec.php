@@ -37,6 +37,61 @@ describe("ResultSet", function() {
 
   });
 
+  describe("Limit&Offset", function() {
+
+    beforeEach(function() {
+
+      $_GET = ['start' => 2, 'length' => 1];
+
+    });
+
+    it("should work with start&length", function() {
+
+      $dataTables = new ResultSet(10);
+      $dataTables->setResultSet($this->query);
+      $dataTables->setParser(new ParamsParser(10));
+      $response = $dataTables->getResponse();
+      expect(count($response['data']))->toBe(1);
+
+      $dataOne = $response['data'];
+
+      $_GET['start'] = 3;
+      $dataTables = new ResultSet(10);
+      $dataTables->setResultSet($this->query);
+      $dataTables->setParser(new ParamsParser(10));
+      $response = $dataTables->getResponse();
+      expect(count($response['data']))->toBe(1);
+      expect($response['data'])->not->toBe($dataOne);
+
+    });
+
+    it("should work with a filter", function() {
+
+      $_GET['search'] = ['value' => 'kr'];
+      $_GET['columns'] = [
+        [
+          'data' => 'name',
+          'searchable' => "true"
+        ]
+      ];
+
+      $dataTables = new ResultSet(10);
+      $dataTables->setResultSet($this->query);
+      $dataTables->setParser(new ParamsParser(10));
+      $dataTables->setColumns(['name']);
+      $response = $dataTables->getResponse();
+      expect(count($response['data']))->toBe(1);
+
+    });
+
+    afterEach(function() {
+
+      unset($_GET);
+
+    });
+
+  });
+
   it("should work with a global search", function() {
 
     $_GET = [

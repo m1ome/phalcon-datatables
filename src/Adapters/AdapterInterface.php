@@ -2,6 +2,8 @@
 
 namespace DataTables\Adapters;
 
+use DataTables\ParamsParser;
+
 abstract class AdapterInterface {
 
   protected $parser  = null;
@@ -14,12 +16,16 @@ abstract class AdapterInterface {
 
   abstract public function getResponse();
 
-  public function setParser($parser) {
+  public function setParser(ParamsParser $parser) {
     $this->parser = $parser;
   }
 
-  public function setColumns($columns) {
+  public function setColumns(array $columns) {
     $this->columns = $columns;
+  }
+
+  public function getColumns() {
+    return $this->columns;
   }
 
   public function columnExists($column) {
@@ -102,7 +108,6 @@ abstract class AdapterInterface {
         break;
       default:
         throw new \Exception('Unknown bind type');
-        break;
     }
 
   }
