@@ -18,6 +18,11 @@
     "require": {
 
     },
+    "extra": {
+      "branch-alias": {
+        "dev_master": "1.0-dev"
+      }
+    },
     "require-dev": {
       "crysalead/kahlan": "dev-master",
       "fzaninotto/faker": "1.5.*@dev"
