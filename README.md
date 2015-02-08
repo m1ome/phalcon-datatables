@@ -72,6 +72,24 @@ class TestController extends \Phalcon\Mvc\Controller {
 }
 ```
 
+### Controller (using Array):
+```php
+<?php
+use \DataTables\DataTable;
+
+class TestController extends \Phalcon\Mvc\Controller {
+    public function indexAction() {
+        if ($this->request->isAjax()) {
+          $array  = $this->modelsManager->createQuery("SELECT * FROM \Example\Models\User")
+                             ->execute()->toArray();
+
+          $dataTables = new DataTable();
+          $dataTables->fromArray($array)->sendResponse();
+        }
+    }
+}
+```
+
 ### Model:
 ```php
 <?php
