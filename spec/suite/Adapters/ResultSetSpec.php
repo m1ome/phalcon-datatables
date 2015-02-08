@@ -46,18 +46,22 @@ describe("ResultSet", function() {
     });
 
     it("should work with start&length", function() {
+      $di = \Phalcon\DI::getDefault();
+      $query = $di->get('modelsManager')->createQuery("SELECT * FROM \Spec\Models\User")->execute();
 
       $dataTables = new ResultSet(10);
-      $dataTables->setResultSet($this->query);
+      $dataTables->setResultSet($query);
       $dataTables->setParser(new ParamsParser(10));
       $response = $dataTables->getResponse();
-      expect(count($response['data']))->toBe(1);
 
+      expect(count($response['data']))->toBe(1);
       $dataOne = $response['data'];
+
+      $query = $di->get('modelsManager')->createQuery("SELECT * FROM \Spec\Models\User")->execute();
 
       $_GET['start'] = 3;
       $dataTables = new ResultSet(10);
-      $dataTables->setResultSet($this->query);
+      $dataTables->setResultSet($query);
       $dataTables->setParser(new ParamsParser(10));
       $response = $dataTables->getResponse();
       expect(count($response['data']))->toBe(1);
@@ -81,7 +85,6 @@ describe("ResultSet", function() {
       $dataTables->setColumns(['name']);
       $response = $dataTables->getResponse();
       expect(count($response['data']))->toBe(1);
-
     });
 
     afterEach(function() {

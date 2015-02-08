@@ -43,20 +43,11 @@ class ResultSet extends AdapterInterface {
       });
 
       $filtered = count($filter);
-
-      if ($offset > 1) {
-        $filter = array_slice($filter, ($offset-1));
-      }
-
       $items = array_map(function($item) {
         return $item->toArray();
       }, $filter);
     } else {
       $filtered = $total;
-      if ($offset > 0) {
-        $this->resultSet->seek($offset-1);
-      }
-
       $this->resultSet->setHydrateMode(PhalconResultSet::HYDRATE_RECORDS);
       $items = array_map('array_unique', $this->resultSet->toArray());
     }
@@ -76,9 +67,12 @@ class ResultSet extends AdapterInterface {
         $args[] = ($dir == 'desc') ? SORT_DESC : SORT_ASC;
       }
 
-
       $args[] = &$items;
       call_user_func_array('array_multisort', $args);
+    }
+
+    if ($offset > 1) {
+      $items = array_slice($items, ($offset - 1));
     }
 
     if ($limit) {
