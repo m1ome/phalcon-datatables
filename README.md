@@ -24,7 +24,7 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 ```json
 {
     "require": {
-        "m1ome/phalcon-datatables": "1.0.x"
+        "m1ome/phalcon-datatables": "1.*"
     }
 }
 ```
