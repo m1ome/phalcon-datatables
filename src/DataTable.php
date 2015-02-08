@@ -3,6 +3,7 @@ namespace DataTables;
 
 use DataTables\Adapters\QueryBuilder;
 use DataTables\Adapters\ResultSet;
+use DataTables\Adapters\ArrayAdapter;
 use Phalcon\Http\Response;
 
 class DataTable extends \Phalcon\Mvc\User\Plugin {
@@ -64,6 +65,20 @@ class DataTable extends \Phalcon\Mvc\User\Plugin {
 
     $adapter = new ResultSet($this->options['length']);
     $adapter->setResultSet($resultSet);
+    $adapter->setParser($this->parser);
+    $adapter->setColumns($columns);
+    $this->response = $adapter->getResponse();
+
+    return $this;
+  }
+
+  public function fromArray($array, $columns = []) {
+    if(empty($columns)) {
+      $columns = array_keys(current($array));
+    }
+
+    $adapter = new ArrayAdapter($this->options['length']);
+    $adapter->setArray($array);
     $adapter->setParser($this->parser);
     $adapter->setColumns($columns);
     $this->response = $adapter->getResponse();

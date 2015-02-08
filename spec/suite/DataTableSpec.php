@@ -38,6 +38,32 @@ describe("DataTable", function() {
 
   });
 
+  it("should create a ArrayAdapter", function() {
+
+    $array  = $this->di->get('modelsManager')
+                      ->createQuery("SELECT * FROM \Spec\Models\User")
+                      ->execute()->toArray();
+
+    $dataTables = new DataTable();
+    $response = $dataTables->fromArray($array)->getResponse();
+    expect($dataTables->getParams())->toBe([
+      "draw" => null,
+      "start" => 1,
+      "length" => 20,
+      "columns" => [],
+      "search" => [],
+      "order" => []
+    ]);
+    expect(count($response['data']))->toBe(20);
+    expect(array_keys($response))->toBe(['draw', 'recordsTotal', 'recordsFiltered', 'data']);
+
+    foreach($response['data'] as $data) {
+      expect(array_keys($data))->toBe(['id', 'name', 'email', 'balance', 'DT_RowId']);
+      expect($data['DT_RowId'])->toBe($data['id']);
+    }
+
+  });
+
   it("should create a QueryBuilder", function() {
 
     $builder = $this->di->get('modelsManager')
