@@ -29,7 +29,7 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
     }
 }
 ```
-* Run `composer install`
+* Run `composer update`
 
 # Example usage
 It uses Phalcon [QueryBuilder](http://docs.phalconphp.com/en/latest/api/Phalcon_Mvc_Model_Query_Builder.html) for pagination in DataTables.
