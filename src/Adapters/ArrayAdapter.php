@@ -5,7 +5,8 @@ namespace DataTables\Adapters;
 class ArrayAdapter extends AdapterInterface {
 
   protected $array  = [];
-  protected $filter = [];
+  protected $column = [];
+  protected $global = [];
   protected $order  = [];
 
   public function setArray(array $array) {
@@ -18,25 +19,38 @@ class ArrayAdapter extends AdapterInterface {
     $total  = count($this->array);
 
     $this->bind('global_search', function($column, $search) {
-      $this->filter[$column][] = $search;
+      $this->global[$column][] = $search;
     });
 
     $this->bind('column_search', function($column, $search) {
-      $this->filter[$column][] = $search;
+      $this->column[$column][] = $search;
     });
 
     $this->bind('order', function($order) {
       $this->order = $order;
     });
 
-    if(count($this->filter)) {
+    if(count($this->global) || count($this->column)) {
       $items = array_filter($this->array, function($item) {
-        $check = true;
+        $check = false;
 
-        foreach($this->filter as $column=>$filters) {
-          foreach($filters as $search) {
-            $check = (strpos($item[$column], $search) !== false);
-            if (!$check) break 2;
+        if (count($this->global)) {
+          foreach($this->global as $column=>$filters) {
+            foreach($filters as $search) {
+              $check = (strpos($item[$column], $search) !== false);
+              if ($check) break 2;
+            }
+          }
+        } else {
+          $check = true;
+        }
+
+        if (count($this->column) && $check) {
+          foreach($this->column as $column=>$filters) {
+            foreach($filters as $search) {
+              $check = (strpos($item[$column], $search) !== false);
+              if (!$check) break 2;
+            }
           }
         }
 

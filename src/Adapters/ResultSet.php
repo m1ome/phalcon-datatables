@@ -6,7 +6,8 @@ use Phalcon\Mvc\Model\Resultset as PhalconResultSet;
 class ResultSet extends AdapterInterface {
 
   protected $resultSet;
-  protected $filter = [];
+  protected $column = [];
+  protected $global = [];
   protected $order  = [];
 
   public function getResponse() {
@@ -15,25 +16,38 @@ class ResultSet extends AdapterInterface {
     $total  = $this->resultSet->count();
 
     $this->bind('global_search', function($column, $search) {
-      $this->filter[$column][] = $search;
+      $this->global[$column][] = $search;
     });
 
     $this->bind('column_search', function($column, $search) {
-      $this->filter[$column][] = $search;
+      $this->column[$column][] = $search;
     });
 
     $this->bind('order', function($order) {
       $this->order = $order;
     });
 
-    if(count($this->filter)) {
+    if(count($this->global) || count($this->column)) {
       $filter = $this->resultSet->filter(function($item){
-        $check = true;
+        $check = false;
 
-        foreach($this->filter as $column=>$filters) {
-          foreach($filters as $search) {
-            $check = (strpos($item->$column, $search) !== false);
-            if (!$check) break 2;
+        if (count($this->global)) {
+          foreach($this->global as $column=>$filters) {
+            foreach($filters as $search) {
+              $check = (strpos($item->$column, $search) !== false);
+              if ($check) break 2;
+            }
+          }
+        } else {
+          $check = true;
+        }
+
+        if (count($this->column) && $check) {
+          foreach($this->column as $column=>$filters) {
+            foreach($filters as $search) {
+              $check = (strpos($item->$column, $search) !== false);
+              if (!$check) break 2;
+            }
           }
         }
 
