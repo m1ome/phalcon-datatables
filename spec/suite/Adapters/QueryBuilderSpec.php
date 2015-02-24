@@ -196,7 +196,7 @@ describe("QueryBuilder", function() {
       ],
       'order' => [
         [
-          'column' => 'name',
+          'column' => 0,
           'dir' => 'desc'
         ]
       ]
@@ -224,7 +224,7 @@ describe("QueryBuilder", function() {
       ],
       'order' => [
         [
-          'column' => 'name',
+          'column' => 0,
           'dir' => 'asc'
         ]
       ]

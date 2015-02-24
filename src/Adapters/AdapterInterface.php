@@ -94,11 +94,11 @@ abstract class AdapterInterface {
 
         $orderArray = [];
 
-        foreach($order as $columnId=>$orderBy) {
+        foreach($order as $orderBy) {
           if (!isset($orderBy['dir']) || !isset($orderBy['column'])) continue;
           $orderDir = $orderBy['dir'];
 
-          $column = $this->parser->getColumnById($columnId);
+          $column = $this->parser->getColumnById($orderBy['column']);
           if (is_null($column) || !$this->columnExists($column)) continue;
 
           $orderArray[] = "{$column} {$orderDir}";
