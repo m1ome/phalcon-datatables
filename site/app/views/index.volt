@@ -35,7 +35,7 @@
           {{ partial('partials/column_search') }}
           <hr>
           <br><br>
-          <h3>ResultSet Examples</h3>
+          <h3>Array&ResultSet Examples</h3>
           <p>
             Usage examples: Basic, Search-by-column<br>
           </p>

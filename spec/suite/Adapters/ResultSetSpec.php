@@ -152,6 +152,33 @@ describe("ResultSet", function() {
 
   });
 
+  it("should search a int", function() {
+
+    $_GET = [
+      'search' => ['value' => '200'],
+      'columns' => [
+        [
+          'data' => 'name',
+          'searchable' => "true"
+        ],
+        [
+          'data' => 'balance',
+          'searchable' => "true"
+        ]
+      ]
+    ];
+
+    $dataTables = new ResultSet(20);
+    $dataTables->setResultSet($this->query);
+    $dataTables->setColumns(['name', 'email', 'balance']);
+    $dataTables->setParser(new ParamsParser(10));
+
+    $response = $dataTables->getResponse();
+    expect(count($response['data']))->toBe(10);
+    expect($response['recordsFiltered'])->toBe(41);
+
+  });
+
   it("should work with a column&global search", function() {
 
     $_GET = [
