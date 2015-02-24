@@ -199,7 +199,7 @@ describe("ResultSet", function() {
       ],
       'order' => [
         [
-          'column' => 'name',
+          'column' => 0,
           'dir' => 'desc'
         ]
       ]
@@ -227,7 +227,7 @@ describe("ResultSet", function() {
       ],
       'order' => [
         [
-          'column' => 'name',
+          'column' => 0,
           'dir' => 'asc'
         ]
       ]
