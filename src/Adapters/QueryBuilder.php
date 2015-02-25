@@ -19,7 +19,7 @@ class QueryBuilder extends AdapterInterface{
     $total = $builder->getPaginate();
 
     $this->bind('global_search', function($column, $search) {
-      $this->builder->orWhere("{$column} LIKE ?0", ["%{$search}%"]);
+      $this->builder->orWhere("{$column} LIKE :key_{$column}:", ["key_{$column}" => "%{$search}%"]);
     });
 
     $this->bind('column_search', function($column, $search) {
