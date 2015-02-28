@@ -62,8 +62,9 @@ class ResultSet extends AdapterInterface {
       }, $filter);
     } else {
       $filtered = $total;
-      $this->resultSet->setHydrateMode(PhalconResultSet::HYDRATE_RECORDS);
-      $items = array_map('array_unique', $this->resultSet->toArray());
+      $items = $this->resultSet->filter(function($item) {
+        return $item->toArray();
+      });
     }
 
     if ($this->order) {
