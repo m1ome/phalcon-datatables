@@ -24,8 +24,7 @@
       }
     },
     "require-dev": {
-      "crysalead/kahlan": "dev-master",
+      "crysalead/kahlan": "~1.1",
       "fzaninotto/faker": "1.5.*@dev"
-    },
-    "minimum-stability": "dev"
+    }
 }

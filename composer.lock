@@ -4,21 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "846cced2387f7f3eedeb3b1a5d3cf1d7",
+    "hash": "9f3494fc9480de0e0db04a5169ef1dcb",
     "packages": [],
     "packages-dev": [
         {
             "name": "crysalead/box",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crysalead/box.git",
-                "reference": "d88c57da9091909c0109a679916cb9294f5e5eaa"
+                "reference": "1c2fbbf73cf29aedf7f1c0dc0d367c7c0f2e5771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/box/zipball/d88c57da9091909c0109a679916cb9294f5e5eaa",
-                "reference": "d88c57da9091909c0109a679916cb9294f5e5eaa",
+                "url": "https://api.github.com/repos/crysalead/box/zipball/1c2fbbf73cf29aedf7f1c0dc0d367c7c0f2e5771",
+                "reference": "1c2fbbf73cf29aedf7f1c0dc0d367c7c0f2e5771",
                 "shasum": ""
             },
             "require": {
@@ -48,20 +48,20 @@
                 "inversion of control",
                 "ioc"
             ],
-            "time": "2014-12-07 00:39:07"
+            "time": "2015-03-21 00:44:48"
         },
         {
             "name": "crysalead/dir",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crysalead/dir.git",
-                "reference": "167ab6d2c367703212c16941ab13987cf30788fb"
+                "reference": "4d86ccfdb5e2466bca006e76515f51fba4d0b652"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/dir/zipball/167ab6d2c367703212c16941ab13987cf30788fb",
-                "reference": "167ab6d2c367703212c16941ab13987cf30788fb",
+                "url": "https://api.github.com/repos/crysalead/dir/zipball/4d86ccfdb5e2466bca006e76515f51fba4d0b652",
+                "reference": "4d86ccfdb5e2466bca006e76515f51fba4d0b652",
                 "shasum": ""
             },
             "require": {
@@ -88,24 +88,24 @@
                 "file",
                 "file system"
             ],
-            "time": "2014-12-13 22:46:24"
+            "time": "2015-03-19 13:42:41"
         },
         {
             "name": "crysalead/filter",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crysalead/filter.git",
-                "reference": "f965a8664f2341537a86a1c2ca043dcc711c6b54"
+                "reference": "066c2b5eda011245e5adfc1c9ed6450d972b7cec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/filter/zipball/f965a8664f2341537a86a1c2ca043dcc711c6b54",
-                "reference": "f965a8664f2341537a86a1c2ca043dcc711c6b54",
+                "url": "https://api.github.com/repos/crysalead/filter/zipball/066c2b5eda011245e5adfc1c9ed6450d972b7cec",
+                "reference": "066c2b5eda011245e5adfc1c9ed6450d972b7cec",
                 "shasum": ""
             },
             "require": {
-                "crysalead/jit": "dev-master",
+                "crysalead/jit": "~1.0",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -134,7 +134,7 @@
                 "aspect programming",
                 "method filtering"
             ],
-            "time": "2015-01-24 13:30:08"
+            "time": "2015-03-21 01:36:02"
         },
         {
             "name": "crysalead/jit",
@@ -142,12 +142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/crysalead/jit.git",
-                "reference": "057270dd31cb3c33728395df224d96ac0553797d"
+                "reference": "deaf0e1234020afc1e238a393dd3787af59dc1ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/jit/zipball/057270dd31cb3c33728395df224d96ac0553797d",
-                "reference": "057270dd31cb3c33728395df224d96ac0553797d",
+                "url": "https://api.github.com/repos/crysalead/jit/zipball/deaf0e1234020afc1e238a393dd3787af59dc1ca",
+                "reference": "deaf0e1234020afc1e238a393dd3787af59dc1ca",
                 "shasum": ""
             },
             "require": {
@@ -157,6 +157,11 @@
                 "crysalead/kahlan": "dev-master"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "jit\\": "src/",
@@ -172,29 +177,27 @@
                 "Code Patcher",
                 "jit"
             ],
-            "time": "2015-01-30 02:25:22"
+            "time": "2015-03-21 01:31:12"
         },
         {
             "name": "crysalead/kahlan",
-            "version": "dev-master",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crysalead/kahlan.git",
-                "reference": "702899d74b43e003fe1fb790245ea1e4696d66d3"
+                "reference": "2f44500dcdfe7f73d603caaaf08ee7de93dfeccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/kahlan/zipball/702899d74b43e003fe1fb790245ea1e4696d66d3",
-                "reference": "702899d74b43e003fe1fb790245ea1e4696d66d3",
+                "url": "https://api.github.com/repos/crysalead/kahlan/zipball/2f44500dcdfe7f73d603caaaf08ee7de93dfeccf",
+                "reference": "2f44500dcdfe7f73d603caaaf08ee7de93dfeccf",
                 "shasum": ""
             },
             "require": {
-                "crysalead/box": "dev-master",
-                "crysalead/dir": "dev-master",
-                "crysalead/filter": "dev-master",
-                "crysalead/jit": "dev-master",
-                "crysalead/set": "dev-master",
-                "crysalead/string": "dev-master",
+                "crysalead/box": "~1.0",
+                "crysalead/dir": "~1.0",
+                "crysalead/filter": "~1.0",
+                "crysalead/jit": "~1.0",
                 "php": ">=5.4"
             },
             "bin": [
@@ -230,87 +233,7 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2015-02-04 17:10:36"
-        },
-        {
-            "name": "crysalead/set",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/set.git",
-                "reference": "fca78453076aca6080f46f6f7b416604526e5c3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/set/zipball/fca78453076aca6080f46f6f7b416604526e5c3b",
-                "reference": "fca78453076aca6080f46f6f7b416604526e5c3b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "set\\": "src/",
-                    "set\\spec\\": "spec/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Array manipulation library",
-            "keywords": [
-                "Array manipulation"
-            ],
-            "time": "2015-01-24 12:06:19"
-        },
-        {
-            "name": "crysalead/string",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/string.git",
-                "reference": "aeb00e4213aa35fd26bf9698dd22f5e60135d2d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/string/zipball/aeb00e4213aa35fd26bf9698dd22f5e60135d2d2",
-                "reference": "aeb00e4213aa35fd26bf9698dd22f5e60135d2d2",
-                "shasum": ""
-            },
-            "require": {
-                "crysalead/set": "dev-master",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "string\\": "src/",
-                    "string\\spec\\": "spec/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "String manipulation library",
-            "keywords": [
-                "string manipulation"
-            ],
-            "time": "2015-01-24 13:51:39"
+            "time": "2015-03-21 01:57:35"
         },
         {
             "name": "fzaninotto/faker",
@@ -318,12 +241,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "81e4eccea302300ac0c69c7ed04c94e29f580633"
+                "reference": "6b1d646e38fad6dcd3191d69c40918fd7aeaa2f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/81e4eccea302300ac0c69c7ed04c94e29f580633",
-                "reference": "81e4eccea302300ac0c69c7ed04c94e29f580633",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/6b1d646e38fad6dcd3191d69c40918fd7aeaa2f8",
+                "reference": "6b1d646e38fad6dcd3191d69c40918fd7aeaa2f8",
                 "shasum": ""
             },
             "require": {
@@ -362,13 +285,12 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-01-27 08:16:46"
+            "time": "2015-03-30 08:56:14"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "crysalead/kahlan": 20,
         "fzaninotto/faker": 20
     },
     "prefer-stable": false,
