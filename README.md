@@ -119,12 +119,12 @@ class User extends \Phalcon\Mvc\Model {
                         url: '/test/index',
                         method: 'POST'
                     },
-                    columns: {
+                    columns: [
                         {data: "id", searchable: false},
                         {data: "name"},
                         {data: "email"},
                         {data: "balance", searchable: false}
-                    }
+                    ]
                 });
             });
         </script>
