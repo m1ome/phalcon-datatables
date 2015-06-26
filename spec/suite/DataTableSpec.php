@@ -12,6 +12,24 @@ describe("DataTable", function() {
 
   });
 
+  it("should work with empty ResultSet", function() {
+
+    $resultset  = $this->di->get('modelsManager')
+                  ->createQuery("SELECT * FROM \Spec\Models\User WHERE balance < 0")
+                  ->execute();
+
+    $dataTables = new DataTable();
+    $response = $dataTables->fromResultSet($resultset)->getResponse();
+
+    expect($response)->toBe([
+      'draw' => null,
+      'recordsTotal' => 0,
+      'recordsFiltered' => 0,
+      'data' => []
+    ]);
+
+  });
+
   it("should create a ResultSet", function() {
 
     $resultset  = $this->di->get('modelsManager')
@@ -38,6 +56,24 @@ describe("DataTable", function() {
 
   });
 
+  it("should create an empty ArrayAdapter", function() {
+
+    $array  = $this->di->get('modelsManager')
+                      ->createQuery("SELECT * FROM \Spec\Models\User WHERE balance < 0")
+                      ->execute()->toArray();
+
+    $dataTables = new DataTable();
+    $response = $dataTables->fromArray($array)->getResponse();
+
+    expect($response)->toBe([
+      'draw' => null,
+      'recordsTotal' => 0,
+      'recordsFiltered' => 0,
+      'data' => []
+    ]);
+
+  });
+
   it("should create a ArrayAdapter", function() {
 
     $array  = $this->di->get('modelsManager')
@@ -61,6 +97,26 @@ describe("DataTable", function() {
       expect(array_keys($data))->toBe(['id', 'name', 'email', 'balance', 'DT_RowId']);
       expect($data['DT_RowId'])->toBe($data['id']);
     }
+
+  });
+
+  it("should create a from a empty QueryBuilder", function() {
+
+    $builder = $this->di->get('modelsManager')
+                   ->createBuilder()
+                   ->columns('id, name, email, balance')
+                   ->from('Spec\Models\User')
+                   ->where('balance < 0');
+
+    $dataTables = new DataTable();
+    $response = $dataTables->fromBuilder($builder)->getResponse();
+
+    expect($response)->toBe([
+      'draw' => null,
+      'recordsTotal' => 0,
+      'recordsFiltered' => 0,
+      'data' => []
+    ]);
 
   });
 
