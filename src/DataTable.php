@@ -58,7 +58,7 @@ class DataTable extends \Phalcon\Mvc\User\Plugin {
   }
 
   public function fromResultSet($resultSet, $columns = []) {
-    if(empty($columns)) {
+    if(empty($columns) && $resultSet->count() > 0) {
       $columns = array_keys($resultSet->getFirst()->toArray());
       $resultSet->rewind();
     }
@@ -73,7 +73,7 @@ class DataTable extends \Phalcon\Mvc\User\Plugin {
   }
 
   public function fromArray($array, $columns = []) {
-    if(empty($columns)) {
+    if(empty($columns) && count($array) > 0) {
       $columns = array_keys(current($array));
     }
 
