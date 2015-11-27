@@ -27,7 +27,9 @@ class QueryBuilder extends AdapterInterface{
     });
 
     $this->bind('order', function($order) {
-      $this->builder->orderBy(implode(', ', $order));
+      if (!empty($order)) {
+        $this->builder->orderBy(implode(', ', $order));
+      }
     });
 
     $builder = new PQueryBuilder([
@@ -37,7 +39,7 @@ class QueryBuilder extends AdapterInterface{
     ]);
 
     $filtered = $builder->getPaginate();
-    
+
     return $this->formResponse([
       'total'     => $total->total_items,
       'filtered'  => $filtered->total_items,
